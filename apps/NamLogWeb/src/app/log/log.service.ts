@@ -26,6 +26,6 @@ export class LogService {
     } else {
       console.error(`API returned code ${error.status}, body was: `, error.error);
     }
-    return throwError(() => new Error('Error fetching logs. Please try again later.'));
+    return throwError(() => new Error("API returned " + error.status + " "+ error.statusText + "."));
   }
 }

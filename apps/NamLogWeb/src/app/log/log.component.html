@@ -10,6 +10,8 @@
   <p *ngIf="pagedmessage == undefined; then loading else hasPaged"></p>
 </Table>
 
-<ng-template #loading><p>Loading messages...</p></ng-template>
+<ng-template #loading><p *ngIf="error == undefined; else showError">Loading messages...</p></ng-template>
+<ng-template #showError><p>{{error}}</p></ng-template>
+
 <ng-template #hasPaged><p *ngIf="pagedmessage?.last;else loadMore">End of logs.</p></ng-template>
 <ng-template #loadMore><p>Keep scrolling to load more messages.</p></ng-template>
