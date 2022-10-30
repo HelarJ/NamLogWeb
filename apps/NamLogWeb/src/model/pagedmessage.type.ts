@@ -1,5 +1,5 @@
-import {Message} from "./message.type";
-import {Pageable} from "./pageable.type";
+import { Message } from "./message.type";
+import { Pageable } from "./pageable.type";
 
 
 export interface Pagedmessage {

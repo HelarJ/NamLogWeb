@@ -1,10 +1,10 @@
-import {Component, OnInit } from "@angular/core";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {LogService} from "./log.service";
-import {Pagedmessage} from "../../model/pagedmessage.type";
-import {Title} from "@angular/platform-browser";
-import {Message} from "../../model/message.type";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { LogService } from "./log.service";
+import { Pagedmessage } from "../../model/pagedmessage.type";
+import { Title } from "@angular/platform-browser";
+import { Message } from "../../model/message.type";
 
 
 @Component({

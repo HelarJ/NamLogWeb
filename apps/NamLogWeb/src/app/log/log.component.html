@@ -43,8 +43,12 @@
 </p-table>
 
 <div *ngIf="error==undefined" class="flex align-items-center flex-wrap card-container mt-2 mb-2">
-  <p-message severity="info" *ngIf="pagedmessage != undefined && pagedmessage.last && pagedmessage.totalElements !== 0;else loadMore" text="End of logs." ></p-message>
+  <p-message severity="info" *ngIf="pagedmessage == undefined;else loadMore" text="Loading messages..." ></p-message>
 </div>
-<ng-template #loadMore>
-  <p-message *ngIf="pagedmessage != undefined && pagedmessage.totalElements !=0" severity="info"  text="Keep scrolling to load more messages."></p-message>
+<ng-template #endOfLogs>
+  <p-message *ngIf="pagedmessage.last && pagedmessage.totalElements != 0;else endOfLogs" severity="info"  text="End of logs."></p-message>
 </ng-template>
+<ng-template #loadMore>
+  <p-message *ngIf="pagedmessage != undefined && pagedmessage.totalElements != 0" severity="info"  text="Keep scrolling to load more messages."></p-message>
+</ng-template>
+

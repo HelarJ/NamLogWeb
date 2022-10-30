@@ -1,14 +1,8 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpResponse
-} from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { RequestCache} from "./request-cache.service";
-import { startWith, tap } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { RequestCache } from "./request-cache.service";
+import { startWith, tap } from "rxjs/operators";
 
 /**
  * Code from https://angular.io/guide/http#caching-requests
