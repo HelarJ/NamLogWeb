@@ -1,17 +1,50 @@
 <form [formGroup]="inputForm" (ngSubmit)="inputForm.valid && onSubmit()">
-  <input type="text" formControlName="username" placeholder="Enter Username">
-  <input type="submit" value="Submit">
+  <div class="flex align-items-center flex-wrap card-container mt-2 mb-2">
+    <span class="p-input-icon-left" >
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText placeholder="Search" formControlName="username"/>
+    </span>
+    <p-message class="mx-2" severity="info" *ngIf="pagedmessage !== undefined;then showMessageCount"></p-message>
+  </div>
 </form>
 
-<Table class="message-container" infiniteScroll [infiniteScrollDistance]="0.5"
-       [infiniteScrollThrottle]="500"  (scrolled)="onScroll()">
-  <p *ngIf="pagedmessage !== undefined">{{pagedmessage.totalElements}} messages found for {{username}}.</p>
-  <tr *ngFor="let msg of messages">{{formatDate(msg.time)}} {{msg.username}}: {{msg.message}}</tr>
-  <p *ngIf="pagedmessage == undefined; then loading else hasPaged"></p>
-</Table>
+<ng-template #showMessageCount>
+  <p-message class="mx-2" severity="info" *ngIf="pagedmessage?.totalElements>0;else showNoMessages" text="{{pagedmessage?.totalElements}} messages found for {{username}}."></p-message>
+</ng-template>
+<ng-template #showNoMessages>
+  <p-message class="mx-2"  severity="warn" *ngIf="error == undefined else showError" text="No messages found for {{username}}"></p-message>
+</ng-template>
+<ng-template #showError>
+  <p-message class="mx-2" severity="error" text="{{error}}">
+  </p-message>
+</ng-template>
 
-<ng-template #loading><p *ngIf="error == undefined; else showError">Loading messages...</p></ng-template>
-<ng-template #showError><p>{{error}}</p></ng-template>
+<p-table *ngIf="messages.length >0"
+         [columns]="columns"
+         [value]="messages"
+         responsiveLayout="stack"
+         styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
+         [resizableColumns]="true"
+         infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="500"  (scrolled)="onScroll()">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Time UTC</th>
+      <th>User</th>
+      <th>Message</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-message>
+    <tr>
+      <td>{{formatDate(message.time)}}</td>
+      <td>{{message.username}}</td>
+      <td style="white-space: break-spaces">{{message.message}}</td>
+    </tr>
+  </ng-template>
+</p-table>
 
-<ng-template #hasPaged><p *ngIf="pagedmessage?.last;else loadMore">End of logs.</p></ng-template>
-<ng-template #loadMore><p>Keep scrolling to load more messages.</p></ng-template>
+<div *ngIf="error==undefined" class="flex align-items-center flex-wrap card-container mt-2 mb-2">
+  <p-message severity="info" *ngIf="pagedmessage != undefined && pagedmessage.last && pagedmessage.totalElements !== 0;else loadMore" text="End of logs." ></p-message>
+</div>
+<ng-template #loadMore>
+  <p-message *ngIf="pagedmessage != undefined && pagedmessage.totalElements !=0" severity="info"  text="Keep scrolling to load more messages."></p-message>
+</ng-template>

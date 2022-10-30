@@ -4,7 +4,8 @@ import {LogComponent} from "./log/log.component";
 import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  {path:"", component: HomeComponent, title: "AAUGH"},
+  {path: "", redirectTo: "home", pathMatch: "full"},
+  {path: "home", component: HomeComponent, title: "AAUGH"},
   {path: "logs/:username", component: LogComponent, title: "Logs"}];
 
 @NgModule({

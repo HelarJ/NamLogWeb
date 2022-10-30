@@ -21,12 +21,19 @@ export class LogComponent implements OnInit {
   public username: string = "default"
   private page:number = 0
   public error:string | undefined = undefined
+  public columns: any[];
 
   constructor(private route: ActivatedRoute, private logService: LogService, private router:Router,
               private titleService: Title) {
     this.inputForm = new FormGroup({
       "username": new FormControl("", [Validators.required])
     })
+
+    this.columns = [
+      { field: 'time', header: 'Time' },
+      { field: 'username', header: 'User' },
+      { field: 'message', header: 'Message' }
+    ];
   }
   clearVariables() : void{
     this.pagedmessage = undefined;
@@ -62,7 +69,7 @@ export class LogComponent implements OnInit {
   }
 
   formatDate(date: string): string{
-    return "[" + date.replace("T", " ").replace("Z", "") + "]"
+    return date.replace("T", " ").replace("Z", "")
   }
 
   onScroll() : void {
