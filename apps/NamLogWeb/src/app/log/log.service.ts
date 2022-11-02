@@ -13,8 +13,8 @@ export class LogService {
 
   constructor(private http: HttpClient) { }
 
-  getPage(username: string, page:number, limit:number): Observable<Pagedmessage>{
-    return this.http.get<Pagedmessage>(this.logUrl+username, {params:{size:limit, page:page}, responseType:"json", observe:"body"})
+  getPage(username: string, startIndex:number, limit:number): Observable<Pagedmessage>{
+    return this.http.get<Pagedmessage>(this.logUrl+username, {params:{size:limit, startIndex:startIndex}, responseType:"json", observe:"body"})
       .pipe(retry(2),
         catchError(this.handleError))
   }

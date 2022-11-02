@@ -6,15 +6,15 @@ import { AppComponent } from "./app.component";
 import { LogComponent } from "./log/log.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { httpInterceptorProviders } from "./http-interceptors";
 import { RequestCache, RequestCacheWithMap } from "./http-interceptors/request-cache.service";
 import { HomeComponent } from "./home/home.component";
-import { InputTextModule } from "primeng/inputtext";
 import { MenuComponent } from "./menu/menu.component";
-import { TabMenuModule } from "primeng/tabmenu";
 import { MessageModule } from "primeng/message";
 import { TableModule } from "primeng/table";
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { InputTextModule } from "primeng/inputtext";
+import { TabMenuModule } from "primeng/tabmenu";
 
 @NgModule({
   declarations: [AppComponent, LogComponent, HomeComponent, MenuComponent],
@@ -24,11 +24,11 @@ import { TableModule } from "primeng/table";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MessageModule,
+    TableModule,
     InfiniteScrollModule,
     InputTextModule,
-    TabMenuModule,
-    MessageModule,
-    TableModule
+    TabMenuModule
   ],
   providers: [
     { provide: RequestCache, useClass: RequestCacheWithMap },

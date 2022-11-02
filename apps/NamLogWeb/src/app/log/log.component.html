@@ -2,14 +2,14 @@
   <div class="flex align-items-center flex-wrap card-container mt-2 mb-2">
     <span class="p-input-icon-left" >
       <i class="pi pi-search"></i>
-      <input type="text" pInputText placeholder="Search" formControlName="username"/>
+      <input type="text" pInputText placeholder="Username" formControlName="username"/>
     </span>
     <p-message class="mx-2" severity="info" *ngIf="pagedmessage !== undefined;then showMessageCount"></p-message>
   </div>
 </form>
 
 <ng-template #showMessageCount>
-  <p-message class="mx-2" severity="info" *ngIf="pagedmessage?.totalElements>0;else showNoMessages" text="{{pagedmessage?.totalElements}} messages found for {{username}}."></p-message>
+  <p-message class="mx-2" severity="info" *ngIf="totalMessages>0;else showNoMessages" text="{{totalMessages}} messages found for {{username}}."></p-message>
 </ng-template>
 <ng-template #showNoMessages>
   <p-message class="mx-2"  severity="warn" *ngIf="error == undefined else showError" text="No messages found for {{username}}"></p-message>
@@ -25,7 +25,7 @@
          responsiveLayout="stack"
          styleClass="p-datatable-sm p-datatable-striped p-datatable-gridlines"
          [resizableColumns]="true"
-         infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="500"  (scrolled)="onScroll()">
+         infiniteScroll [infiniteScrollDistance]="0.5" [infiniteScrollThrottle]="100"  (scrolled)="onScroll()">
   <ng-template pTemplate="header">
     <tr>
       <th>Time UTC</th>
@@ -43,12 +43,12 @@
 </p-table>
 
 <div *ngIf="error==undefined" class="flex align-items-center flex-wrap card-container mt-2 mb-2">
-  <p-message severity="info" *ngIf="pagedmessage == undefined;else loadMore" text="Loading messages..." ></p-message>
+  <p-message severity="info" *ngIf="pagedmessage == undefined;else endOfLogs" text="Loading messages..." ></p-message>
 </div>
 <ng-template #endOfLogs>
-  <p-message *ngIf="pagedmessage.last && pagedmessage.totalElements != 0;else endOfLogs" severity="info"  text="End of logs."></p-message>
+  <p-message *ngIf="pagedmessage != undefined && pagedmessage.finalPage && totalMessages != 0;else loadMore" severity="info"  text="End of logs."></p-message>
 </ng-template>
 <ng-template #loadMore>
-  <p-message *ngIf="pagedmessage != undefined && pagedmessage.totalElements != 0" severity="info"  text="Keep scrolling to load more messages."></p-message>
+  <p-message *ngIf="pagedmessage != undefined && totalMessages != 0" severity="info"  text="Keep scrolling to load more messages."></p-message>
 </ng-template>
 
