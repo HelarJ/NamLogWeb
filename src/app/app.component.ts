@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {ToolbarComponent} from "../toolbar/toolbar.component";
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   standalone: true,
@@ -10,8 +10,6 @@ import {ToolbarComponent} from "../toolbar/toolbar.component";
     <nam-log-web-toolbar></nam-log-web-toolbar>
     <router-outlet></router-outlet>
   `,
-  styles: [
-  ]
+  styles: [],
 })
-export class AppComponent {
-}
+export class AppComponent {}
