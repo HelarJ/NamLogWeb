@@ -3,11 +3,10 @@ export interface Message {
   time: string;
   username: string;
   message: string;
-
 }
 export interface Pagedmessage {
-  messages: Array<Message>,
-  lastId: number,
-  finalPage: boolean,
-  totalMessages: number
+  messages: Array<Message>;
+  lastId: number;
+  finalPage: boolean;
+  totalMessages: number;
 }
