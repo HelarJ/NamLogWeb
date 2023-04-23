@@ -11,6 +11,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
+      - run: npm ci
       # Deploy to cPanel
       - name: FTP-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
