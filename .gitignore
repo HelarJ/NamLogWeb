@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+!dist/nam-log-web/_worker.js
 tmp
 /out-tsc
 
